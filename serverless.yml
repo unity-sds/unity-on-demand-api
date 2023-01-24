@@ -9,6 +9,17 @@ custom:
 provider:
   name: aws
   runtime: python3.9
+  deploymentMethod: direct
+  stage: dev
+  region: ${opt:region, "us-west-2"}
+  deploymentBucket:
+    skipPolicySetup: true
+
+	
+  iam:
+    role:
+      name: unity-on-demand-api-lambda-role
+      permissionsBoundary: arn:aws:iam::${aws:accountId}:policy/${param:permissionsBoundaryPolicyName}
 
 functions:
   api:
