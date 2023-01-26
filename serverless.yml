@@ -15,7 +15,6 @@ provider:
   deploymentBucket:
     skipPolicySetup: true
 
-	
   iam:
     role:
       name: unity-on-demand-api-lambda-role
