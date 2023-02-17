@@ -1,4 +1,4 @@
-service: unity-on-demand-api-${sls:instanceId}
+service: unity-on-demand-api
 
 frameworkVersion: '3'
 
