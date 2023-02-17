@@ -17,7 +17,6 @@ provider:
 
   iam:
     role:
-      name: unity-on-demand-api-lambda-role
       permissionsBoundary: arn:aws:iam::${aws:accountId}:policy/${param:permissionsBoundaryPolicyName}
 
 functions:
