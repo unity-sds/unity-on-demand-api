@@ -7,23 +7,17 @@ from flask_restx import Resource, fields
 from unity_on_demand.controllers.api_v01.config import api, od_ns
 
 
-@od_ns.route("/od/data/prewarm", endpoint="prewarm")
+@od_ns.route("/prewarm", endpoint="prewarm")
 @api.doc(
     responses={
         200: "Success",
         400: "Invalid parameters",
         401: "Unathorized",
         500: "Execution failed",
-    },
-    description="Prewarm SPS.",
+    }
 )
 class Prewarm(Resource):
-    """Pre-warm SPS."""
-
-    arg_parser = od_ns.parser()
-    arg_parser.add_argument(
-        "request_id", type=str, help="prewarm request ID", required=True
-    )
+    """Endpoint for making prewarm requests to SPS."""
 
     json_parser = od_ns.parser()
     json_parser.add_argument(
@@ -53,24 +47,11 @@ class Prewarm(Resource):
         },
     )
 
-    @od_ns.expect(arg_parser)
-    @api.marshal_with(model)
-    @api.doc(security="apikey")
-    def get(self):
-        try:
-            request_id = request.args.get("request_id")
-            return {
-                "success": True,
-                "message": f"Status for prewarm request ID {request_id}",
-                "request_id": request_id,
-            }
-        except Exception as e:
-            return {"success": False, "message": str(e)}, 400
-
     @od_ns.expect(json_parser)
     @api.marshal_with(model)
-    @api.doc(security="apikey")
     def post(self):
+        """Submit request to prewarm SPS."""
+
         request_json = request.get_json()
         gpu = request_json.get("gpu_needed", False)
         disk_space_in_gb = request_json.get("disk_space_in_gb", 20)
@@ -88,3 +69,52 @@ class Prewarm(Resource):
                 "success": False,
                 "message": str(e),
             }, 500
+
+
+@od_ns.route("/prewarm/<string:request_id>", endpoint="prewarm_status")
+@od_ns.param("request_id", "prewarm request ID")
+@api.doc(
+    responses={
+        200: "Success",
+        400: "Invalid parameters",
+        401: "Unathorized",
+        500: "Execution failed",
+    }
+)
+class PrewarmRequest(Resource):
+    """Endpoint for CRUD operations on prewarm requests."""
+
+    model = api.model(
+        "PrewarmRequest",
+        {
+            "success": fields.Boolean(description="success flag"),
+            "message": fields.String(description="message"),
+            "request_id": fields.String(description="prewarm request ID"),
+        },
+    )
+
+    @api.marshal_with(model)
+    def get(self, request_id):
+        """Get status of prewarm request."""
+
+        try:
+            return {
+                "success": True,
+                "message": f"Status for prewarm request ID {request_id}",
+                "request_id": request_id,
+            }
+        except Exception as e:
+            return {"success": False, "message": str(e)}, 400
+
+    @api.marshal_with(model)
+    def delete(self, request_id):
+        """Cancel prewarm request."""
+
+        try:
+            return {
+                "success": True,
+                "message": f"Cancelled prewarm request ID {request_id}",
+                "request_id": request_id,
+            }
+        except Exception as e:
+            return {"success": False, "message": str(e)}, 400
