@@ -23,7 +23,8 @@ functions:
   api:
     handler: wsgi_handler.handler
     events:
-      - httpApi: '*'
+      - http: ANY /
+      - http: 'ANY /{proxy+}'
 
 plugins:
   - serverless-wsgi
