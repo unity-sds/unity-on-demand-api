@@ -10,6 +10,9 @@ package:
 provider:
   name: aws
   runtime: python3.9
+  deploymentMethod: direct
+  httpApi:
+    cors: true
   region: ${opt:region, "us-west-2"}
   deploymentBucket:
     skipPolicySetup: true
@@ -24,11 +27,8 @@ functions:
       patterns:
         - "!run_local.sh"
         - "!deploy.sh"
-        - "!requirements.txt"
-        - "!package.json"
-        - "!package-lock.json"
         - "!.virtualenv/**"
-        - "!node_modules/**"
+        - "!env/**"
         - "!__pycache__/**"
     handler: app.main.handler
     environment:
