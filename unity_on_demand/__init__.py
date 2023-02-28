@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_restx import apidoc
+from flask_cors import CORS
 
 
 def create_app():
 
     app = Flask(__name__)
+
+    cors = CORS().init_app(app)
 
     # register our blueprints
     from .controllers.main import main

@@ -10,7 +10,8 @@ provider:
   name: aws
   runtime: python3.9
   deploymentMethod: direct
-  stage: dev
+  httpApi:
+    cors: true
   region: ${opt:region, "us-west-2"}
   deploymentBucket:
     skipPolicySetup: true
