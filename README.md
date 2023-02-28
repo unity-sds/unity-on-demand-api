@@ -1,131 +1,131 @@
-<!--
-title: 'Serverless Framework Python Flask API on AWS'
-description: 'This template demonstrates how to develop and deploy a simple Python Flask API running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: Python
-priority: 2
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+<!-- Header block for project -->
+<hr>
+
+<div align="center">
+
+![logo](https://user-images.githubusercontent.com/3129134/163255685-857aa780-880f-4c09-b08c-4b53bf4af54d.png)
+
+<h1 align="center">[INSERT YOUR REPO / PROJ NAME HERE]</h1>
+<!-- ☝️ Replace with your repo name ☝️ -->
+
+</div>
+
+<pre align="center">[INSERT A SINGLE SENTENCE DESCRIBING THE PURPOSE OF YOUR REPO / PROJ]</pre>
+<!-- ☝️ Replace with a single sentence describing the purpose of your repo / proj ☝️ -->
+
+<!-- Header block for project -->
+
+[INSERT YOUR BADGES HERE (SEE: https://shields.io)] [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) [![SLIM](https://img.shields.io/badge/Best%20Practices%20from-SLIM-blue)](https://nasa-ammos.github.io/slim/)
+<!-- ☝️ Add badges via: https://shields.io e.g. ![](https://img.shields.io/github/your_chosen_action/your_org/your_repo) ☝️ -->
+
+[INSERT SCREENSHOT OF YOUR SOFTWARE, IF APPLICABLE]
+<!-- ☝️ Screenshot of your software (if applicable) via ![](https://uri-to-your-screenshot) ☝️ -->
+
+[INSERT MORE DETAILED DESCRIPTION OF YOUR REPOSITORY HERE]
+<!-- ☝️ Replace with a more detailed description of your repository, including why it was made and whom its intended for.  ☝️ -->
+
+[INSERT LIST OF IMPORTANT PROJECT / REPO LINKS HERE]
+<!-- example links>
+[Website](INSERT WEBSITE LINK HERE) | [Docs/Wiki](INSERT DOCS/WIKI SITE LINK HERE) | [Discussion Board](INSERT DISCUSSION BOARD LINK HERE) | [Issue Tracker](INSERT ISSUE TRACKER LINK HERE)
 -->
 
-# Serverless Framework Python Flask API on AWS
+## Features
 
-This template demonstrates how to develop and deploy a simple Python Flask API service running on AWS Lambda using the traditional Serverless Framework.
+* [INSERT LIST OF FEATURES IMPORTANT TO YOUR USERS HERE]
+  
+<!-- ☝️ Replace with a bullet-point list of your features ☝️ -->
 
+## Contents
 
-## Anatomy of the template
+* [Quick Start](#quick-start)
+* [Changelog](#changelog)
+* [FAQ](#frequently-asked-questions-faq)
+* [Contributing Guide](#contributing)
+* [License](#license)
+* [Support](#support)
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to configured `httpApi` events. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the events are configured in a way to accept all incoming requests, `Flask` framework is responsible for routing and handling requests internally. The implementation takes advantage of `serverless-wsgi`, which allows you to wrap WSGI applications such as Flask apps. To learn more about `serverless-wsgi`, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi). Additionally, the template relies on `serverless-python-requirements` plugin for packaging dependencies from `requirements.txt` file. For more details about `serverless-python-requirements` configuration, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
+## Quick Start
 
-## Usage
+This guide provides a quick way to get started with our project. Please see our [docs]([INSERT LINK TO DOCS SITE / WIKI HERE]) for a more comprehensive overview.
 
-### Prerequisites
+### Requirements
 
-In order to package your dependencies locally with `serverless-python-requirements`, you need to have `Python3.8` installed locally. You can create and activate a dedicated virtual environment with the following command:
+* [INSERT LIST OF REQUIREMENTS HERE]
+  
+<!-- ☝️ Replace with a numbered list of your requirements, including hardware if applicable ☝️ -->
 
-```bash
-python3.8 -m venv ./venv
-source ./venv/bin/activate
-```
+### Setup Instructions
 
-Alternatively, you can also use `dockerizePip` configuration from `serverless-python-requirements`. For details on that, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
+1. [INSERT STEP-BY-STEP SETUP INSTRUCTIONS HERE, WITH OPTIONAL SCREENSHOTS]
+   
+<!-- ☝️ Replace with a numbered list of how to set up your software prior to running ☝️ -->
 
-### Deployment
+### Run Instructions
 
-This example is made to work with the Serverless Framework dashboard, which includes advanced features such as CI/CD, monitoring, metrics, etc.
+1. [INSERT STEP-BY-STEP RUN INSTRUCTIONS HERE, WITH OPTIONAL SCREENSHOTS]
 
-In order to deploy with dashboard, you need to first login with:
+<!-- ☝️ Replace with a numbered list of your run instructions, including expected results ☝️ -->
 
-```
-serverless login
-```
+### Usage Examples
 
-install dependencies with:
+* [INSERT LIST OF COMMON USAGE EXAMPLES HERE, WITH OPTIONAL SCREENSHOTS]
 
-```
-npm install
-```
+<!-- ☝️ Replace with a list of your usage examples, including screenshots if possible, and link to external documentation for details ☝️ -->
 
-and
+### Build Instructions (if applicable)
 
-```
-pip install -r requirements.txt
-```
+1. [INSERT STEP-BY-STEP BUILD INSTRUCTIONS HERE, WITH OPTIONAL SCREENSHOTS]
 
-and then perform deployment with:
+<!-- ☝️ Replace with a numbered list of your build instructions, including expected results / outputs with optional screenshots ☝️ -->
 
-```
-serverless deploy
-```
+### Test Instructions (if applicable)
 
-After running deploy, you should see output similar to:
+1. [INSERT STEP-BY-STEP TEST INSTRUCTIONS HERE, WITH OPTIONAL SCREENSHOTS]
 
-```bash
-Deploying aws-python-flask-api-project to stage dev (us-east-1)
+<!-- ☝️ Replace with a numbered list of your test instructions, including expected results / outputs with optional screenshots ☝️ -->
 
-✔ Service deployed to stack aws-python-flask-api-project-dev (182s)
+## Changelog
 
-endpoint: ANY - https://xxxxxxxx.execute-api.us-east-1.amazonaws.com
-functions:
-  api: aws-python-flask-api-project-dev-api (1.5 MB)
-```
+See our [CHANGELOG.md](CHANGELOG.md) for a history of our changes.
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).
+See our [releases page]([INSERT LINK TO YOUR RELEASES PAGE]) for our key versioned releases.
 
-### Invocation
+<!-- ☝️ Replace with links to your changelog and releases page ☝️ -->
 
-After successful deployment, you can call the created application via HTTP:
+## Frequently Asked Questions (FAQ)
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
-```
+[INSERT LINK TO FAQ PAGE OR PROVIDE FAQ INLINE HERE]
+<!-- example link to FAQ PAGE>
+Questions about our project? Please see our: [FAQ]([INSERT LINK TO FAQ / DISCUSSION BOARD])
+-->
 
-Which should result in the following response:
+<!-- example FAQ inline format>
+1. Question 1
+   - Answer to question 1
+2. Question 2
+   - Answer to question 2
+-->
 
-```
-{"message":"Hello from root!"}
-```
+<!-- example FAQ inline with no questions yet>
+No questions yet. Propose a question to be added here by reaching out to our contributors! See support section below.
+-->
 
-Calling the `/hello` path with:
+<!-- ☝️ Replace with a list of frequently asked questions from your project, or post a link to your FAQ on a discussion board ☝️ -->
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/hello
-```
+## Contributing
 
-Should result in the following response:
+Interested in contributing to our project? Please see our: [CONTRIBUTING.md](CONTRIBUTING.md)
 
-```bash
-{"message":"Hello from path!"}
-```
+## License
 
-If you try to invoke a path or method that does not have a configured handler, e.g. with:
+See our: [LICENSE](LICENSE)
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/nonexistent
-```
+## Support
 
-You should receive the following response:
+[INSERT CONTACT INFORMATION OR PROFILE LINKS TO MAINTAINERS AMONG COMMITTER LIST]
 
-```bash
-{"error":"Not Found!"}
-```
+<!-- example list of contacts>
+Key points of contact are: [@github-user-1](link to github profile) [@github-user-2](link to github profile)
+-->
 
-### Local development
-
-Thanks to capabilities of `serverless-wsgi`, it is also possible to run your application locally, however, in order to do that, you will need to first install `werkzeug` dependency, as well as all other dependencies listed in `requirements.txt`. It is recommended to use a dedicated virtual environment for that purpose. You can install all needed dependencies with the following commands:
-
-```bash
-pip install werkzeug
-pip install -r requirements.txt
-```
-
-At this point, you can run your application locally with the following command:
-
-```bash
-serverless wsgi serve
-```
-
-For additional local development capabilities of `serverless-wsgi` plugin, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi).
+<!-- ☝️ Replace with the key individuals who should be contacted for questions ☝️ -->
