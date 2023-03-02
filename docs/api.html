@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>My Project - ReDoc</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://fastapi.tiangolo.com/img/favicon.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <style data-styled="" data-styled-version="4.4.1"></style>
+</head>
+<body>
+    <div id="redoc-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"> </script>
+    <script>
+        var spec = {"openapi": "3.0.2", "info": {"title": "Unity On-Demand REST API", "description": "Unity On-Demand Operations", "version": "0.0.1"}, "paths": {"/": {"get": {"summary": "Root", "operationId": "root__get", "responses": {"200": {"description": "Successful Response", "content": {"application/json": {"schema": {}}}}}}}, "/od/prewarm": {"post": {"tags": ["on-demand"], "summary": "Create Prewarm Request", "operationId": "create_prewarm_request_od_prewarm_post", "parameters": [{"required": false, "schema": {"title": "Gpu Needed", "type": "boolean", "default": false}, "name": "gpu_needed", "in": "query"}, {"required": false, "schema": {"title": "Disk Space In Gb", "type": "integer", "default": 20}, "name": "disk_space_in_gb", "in": "query"}, {"required": false, "schema": {"title": "Mem Size In Gb", "type": "integer", "default": 4}, "name": "mem_size_in_gb", "in": "query"}], "responses": {"200": {"description": "Success", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/PrewarmResponse"}}}}, "400": {"description": "Invalid parameters"}, "401": {"description": "Unauthorized"}, "500": {"description": "Execution failed"}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/od/prewarm/{request_id}": {"get": {"tags": ["on-demand"], "summary": "Get Prewarm Request", "operationId": "get_prewarm_request_od_prewarm__request_id__get", "parameters": [{"required": true, "schema": {"title": "Request Id", "type": "string"}, "name": "request_id", "in": "path"}], "responses": {"200": {"description": "Success", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/PrewarmResponse"}}}}, "400": {"description": "Invalid parameters"}, "401": {"description": "Unauthorized"}, "500": {"description": "Execution failed"}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/test/echo": {"get": {"tags": ["test"], "summary": "Echo", "operationId": "echo_test_echo_get", "parameters": [{"required": true, "schema": {"title": "Echo Str", "type": "string"}, "name": "echo_str", "in": "query"}], "responses": {"200": {"description": "Success", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/EchoResponse"}}}}, "400": {"description": "Invalid parameters"}, "401": {"description": "Unauthorized"}, "500": {"description": "Echo execution failed"}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}}, "components": {"schemas": {"EchoResponse": {"title": "EchoResponse", "required": ["success", "message"], "type": "object", "properties": {"success": {"title": "Success", "type": "boolean"}, "message": {"title": "Message", "type": "string"}}}, "HTTPValidationError": {"title": "HTTPValidationError", "type": "object", "properties": {"detail": {"title": "Detail", "type": "array", "items": {"$ref": "#/components/schemas/ValidationError"}}}}, "PrewarmResponse": {"title": "PrewarmResponse", "required": ["success", "message", "request_id"], "type": "object", "properties": {"success": {"title": "Success", "type": "boolean"}, "message": {"title": "Message", "type": "string"}, "request_id": {"title": "Request Id", "type": "string"}}}, "ValidationError": {"title": "ValidationError", "required": ["loc", "msg", "type"], "type": "object", "properties": {"loc": {"title": "Location", "type": "array", "items": {"anyOf": [{"type": "string"}, {"type": "integer"}]}}, "msg": {"title": "Message", "type": "string"}, "type": {"title": "Error Type", "type": "string"}}}}}};
+        Redoc.init(spec, {}, document.getElementById("redoc-container"));
+    </script>
+</body>
+</html>
+
