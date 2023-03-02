@@ -2,8 +2,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 router = APIRouter(
-    prefix="/od",
-    tags=["on-demand"],
+    prefix="/on-demand/v020",
+    tags=["on-demand v0.2.0"],
     responses={
         200: {"description": "Success"},
         400: {"description": "Invalid parameters"},
