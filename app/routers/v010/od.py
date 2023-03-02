@@ -9,6 +9,7 @@ router = APIRouter(
         400: {"description": "Invalid parameters"},
         401: {"description": "Unauthorized"},
         500: {"description": "Execution failed"},
+        501: {"description": "Not implemented"},
     },
 )
 
@@ -20,12 +21,10 @@ class PrewarmResponse(BaseModel):
 
 
 @router.post("/prewarm")
-async def create_prewarm_request(
-    gpu_needed: bool = False, disk_space_in_gb: int = 20, mem_size_in_gb: int = 4
-) -> PrewarmResponse:
+async def create_prewarm_request(node_count: int = 20) -> PrewarmResponse:
     return {
         "success": True,
-        "message": f"Got gpu_needed:{gpu_needed}, disk_space_in_gb: {disk_space_in_gb}, mem_size_in_gb: {mem_size_in_gb}",
+        "message": f"Got node_count:{node_count}",
         "request_id": "some-request-id",
     }
 
@@ -35,5 +34,14 @@ async def get_prewarm_request(request_id: str) -> PrewarmResponse:
     return {
         "success": True,
         "message": f"Status for prewarm request ID {request_id}",
+        "request_id": request_id,
+    }
+
+
+@router.delete("/prewarm/{request_id}")
+async def cancel_prewarm_request(request_id: str) -> PrewarmResponse:
+    return {
+        "success": True,
+        "message": f"Submitted cancellation of prewarm request ID {request_id}",
         "request_id": request_id,
     }

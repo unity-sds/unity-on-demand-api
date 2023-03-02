@@ -10,10 +10,10 @@ from .routers.v020 import od as od_v020
 
 
 app = FastAPI(
-        title="Unity On-Demand REST API",
-        version="0.0.1",
-        description="Unity On-Demand Operations",
-        root_path=f"/{os.environ.get('STAGE')}/" if "STAGE" in os.environ else None
+    title="Unity On-Demand REST API",
+    version="0.0.1",
+    description="Unity On-Demand Operations",
+    root_path=f"/{os.environ.get('STAGE')}/" if "STAGE" in os.environ else None,
 )
 
 app.add_middleware(

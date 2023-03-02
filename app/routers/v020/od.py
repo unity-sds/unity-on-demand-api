@@ -9,6 +9,7 @@ router = APIRouter(
         400: {"description": "Invalid parameters"},
         401: {"description": "Unauthorized"},
         500: {"description": "Execution failed"},
+        501: {"description": "Not implemented"},
     },
 )
 
@@ -35,5 +36,14 @@ async def get_prewarm_request(request_id: str) -> PrewarmResponse:
     return {
         "success": True,
         "message": f"Status for prewarm request ID {request_id}",
+        "request_id": request_id,
+    }
+
+
+@router.delete("/prewarm/{request_id}")
+async def cancel_prewarm_request(request_id: str) -> PrewarmResponse:
+    return {
+        "success": True,
+        "message": f"Submitted cancellation of prewarm request ID {request_id}",
         "request_id": request_id,
     }
