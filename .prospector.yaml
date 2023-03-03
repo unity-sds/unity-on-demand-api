@@ -1,0 +1,7 @@
+output-format: pylint
+
+autodetect: false
+
+ignore-paths:
+  - env
+  - node_modules

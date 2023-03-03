@@ -1,5 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
+
+from app.config import Settings, get_settings
+
 
 router = APIRouter(
     prefix="/test",
@@ -19,5 +22,10 @@ class EchoResponse(BaseModel):
 
 
 @router.get("/echo")
-async def echo(echo_str: str) -> EchoResponse:
-    return {"success": True, "message": f"{echo_str}"}
+async def echo(
+    echo_str: str, settings: Settings = Depends(get_settings)
+) -> EchoResponse:
+    return {
+        "success": True,
+        "message": f"Echoing '{echo_str}' from stage {settings.stage}",
+    }
