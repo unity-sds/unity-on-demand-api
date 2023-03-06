@@ -1,6 +1,8 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+from ..v010.od import PrewarmResponse
+
 router = APIRouter(
     prefix="/on-demand/v020",
     tags=["on-demand v0.2.0"],
@@ -12,12 +14,6 @@ router = APIRouter(
         501: {"description": "Not implemented"},
     },
 )
-
-
-class PrewarmResponse(BaseModel):
-    success: bool
-    message: str
-    request_id: str
 
 
 @router.post("/prewarm")
