@@ -1,7 +1,7 @@
 #!/bin/bash
 virtualenv env
 source env/bin/activate
-pip install openapi-python-client
+pip install openapi-python-client autoflake isort black
 if [ -d "unity-on-demand-api-client" ]; then
   action=update
 else
