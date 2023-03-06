@@ -1,6 +1,7 @@
 import os
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.routing import APIRoute
 from mangum import Mangum
 
 from .config import Settings, get_settings
@@ -14,6 +15,7 @@ app = FastAPI(
     version="0.0.1",
     description="Unity On-Demand Operations",
     root_path=f"/{os.environ.get('STAGE')}/" if "STAGE" in os.environ else None,
+    generate_unique_id_function=lambda route: f"{route.name}",
 )
 
 
