@@ -1,0 +1,6 @@
+project_name_override: unity-on-demand-api-client
+package_name_override: unity_on_demand_client
+post_hooks:
+   - "autoflake -i -r --remove-all-unused-imports --remove-unused-variables --ignore-init-module-imports ."
+   - "isort ."
+   - "black ."
