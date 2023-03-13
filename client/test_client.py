@@ -16,14 +16,14 @@ client = Client(base_url="http://localhost:8000")
 
 
 def test_echo():
-    r = echo.sync(client=client, echo_str="test this")
+    r = echo.sync_detailed(client=client, echo_str="test this")
     logging.info(f"response: {r}")
     assert r.success == True
 
 
 @pytest.fixture
 def response():
-    return create_prewarm_request.sync(client=client)
+    return create_prewarm_request.sync_detailed(client=client)
 
 
 def test_create_prewarm_request(response):
@@ -32,10 +32,10 @@ def test_create_prewarm_request(response):
 
 
 def test_get_prewarm_status(response):
-    r = get_prewarm_request.sync(client=client, request_id=response.request_id)
+    r = get_prewarm_request.sync_detailed(client=client, request_id=response.request_id)
     logging.info(f"response: {r}")
 
 
 def test_cancel_prewarm_status(response):
-    r = cancel_prewarm_request.sync(client=client, request_id=response.request_id)
+    r = cancel_prewarm_request.sync_detailed(client=client, request_id=response.request_id)
     logging.info(f"response: {r}")

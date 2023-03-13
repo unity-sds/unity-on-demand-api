@@ -1,6 +1,7 @@
 import logging
+from typing import Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, status
 from pydantic import BaseModel
 import boto3
 
@@ -23,14 +24,21 @@ router = APIRouter(
 class PrewarmResponse(BaseModel):
     success: bool
     message: str
-    request_id: str
+    request_id: Optional[str]
 
 
 @router.post("/prewarm")
-async def create_prewarm_request(node_count: int = 20) -> PrewarmResponse:
-    client = boto3.client("eks")
-    #clusters = client.list_clusters()
-    #logger.info(f"clusters: {clusters}")
+async def create_prewarm_request(response: Response, node_count: int = 20) -> PrewarmResponse:
+    try:
+        client = boto3.client("eks")
+        clusters = client.list_clusters()
+        logger.info(f"clusters: {clusters}")
+    except Exception as e:
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return {
+            "success": False,
+            "message": f"Got exception: {str(e)}"
+        }
     return {
         "success": True,
         "message": f"Got node_count:{node_count}",

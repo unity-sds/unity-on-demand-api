@@ -27,7 +27,7 @@ client = Client(base_url="http://localhost:8000")
 class MyHandler(RegexMatchingEventHandler):
     def on_created(self, event):
         logging.info(f"In MyHandler: {event}")
-        r = create_prewarm_request.sync(client=client, node_count=1)
+        r = create_prewarm_request.sync_detailed(client=client, node_count=COUNTER)
         logging.info(f"response: {r}")
 
 
