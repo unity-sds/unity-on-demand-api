@@ -1,5 +1,11 @@
+import logging
+
 from fastapi import APIRouter
 from pydantic import BaseModel
+import boto3
+
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/on-demand/v010",
@@ -22,6 +28,9 @@ class PrewarmResponse(BaseModel):
 
 @router.post("/prewarm")
 async def create_prewarm_request(node_count: int = 20) -> PrewarmResponse:
+    client = boto3.client("eks")
+    #clusters = client.list_clusters()
+    #logger.info(f"clusters: {clusters}")
     return {
         "success": True,
         "message": f"Got node_count:{node_count}",

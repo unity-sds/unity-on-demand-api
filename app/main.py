@@ -1,4 +1,5 @@
 import os
+import logging
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.routing import APIRoute
@@ -8,6 +9,16 @@ from .config import Settings, get_settings
 from .routers import test
 from .routers.v010 import od as od_v010
 from .routers.v020 import od as od_v020
+
+
+# setup loggers
+logging.config.fileConfig(
+    os.path.join(os.path.dirname(__file__), "..", "logging.conf"),
+    disable_existing_loggers=False,
+)
+
+# get root logger
+logger = logging.getLogger(__name__)
 
 
 app = FastAPI(

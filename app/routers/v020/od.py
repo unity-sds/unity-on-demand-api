@@ -1,7 +1,12 @@
+import logging
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 
 from ..v010.od import PrewarmResponse
+
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/on-demand/v020",
