@@ -35,6 +35,8 @@ class PrewarmResponse(BaseModel):
 async def create_prewarm_request(
     response: Response, node_count: int = 20
 ) -> PrewarmResponse:
+    # TODO: replace this code with a call to the unity-sps-api when it 
+    # implements prewarm; here we do the prewarming ourselves
     try:
         client = boto3.client("eks")
         # clusters = client.list_clusters()
