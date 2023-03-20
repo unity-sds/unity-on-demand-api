@@ -33,6 +33,7 @@ functions:
     handler: app.main.handler
     environment:
       STAGE: ${self:provider.stage}
+      CLUSTER_NAME: ${param:cluster_name}
     events:
       - http: ANY /
       - http: 'ANY /{proxy+}'
