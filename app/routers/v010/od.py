@@ -79,6 +79,7 @@ async def create_prewarm_request(
         }
     except Exception as e:
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        logger.error(f"Got exception: {str(e)}")
         return {"success": False, "message": f"Got exception: {str(e)}"}
 
 
@@ -117,6 +118,7 @@ async def get_prewarm_request(response: Response, request_id: str) -> PrewarmRes
         }
     except Exception as e:
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        logger.error(f"Got exception: {str(e)}")
         return {"success": False, "message": f"Got exception: {str(e)}"}
 
 
