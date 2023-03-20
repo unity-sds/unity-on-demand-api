@@ -2,6 +2,7 @@
 import os
 import time
 import logging
+import argparse
 
 from watchdog.observers import Observer
 from watchdog.events import (
@@ -20,10 +21,6 @@ from unity_on_demand_client.api.on_demand_v0_1_0 import (
 )
 
 
-# create client
-client = Client(base_url="http://localhost:8000")
-
-
 # global counter
 COUNTER = 0
 
@@ -38,7 +35,7 @@ class MyHandler(RegexMatchingEventHandler):
             logging.info(f"response: {r}")
 
 
-def main():
+def main(client):
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(message)s",
@@ -64,4 +61,16 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(
+        description="watch files and for every 20 found trigger OD prewarm call"
+    )
+    parser.add_argument(
+        "-u",
+        "--url",
+        type=str,
+        default="http://localhost:8000",
+        help="base url to On-Demand REST API",
+    )
+    args = parser.parse_args()
+    client = Client(base_url=args.url)
+    main(client)
