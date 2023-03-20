@@ -1,5 +1,6 @@
 import os
 import logging
+import logging.config
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.routing import APIRoute
