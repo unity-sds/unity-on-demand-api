@@ -33,21 +33,26 @@ class MyHandler(RegexMatchingEventHandler):
 
 
 def main(client):
+    # configure logging
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
+
+    # directory to watch
     watch_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
     if not os.path.isdir(watch_dir):
         os.makedirs(watch_dir)
+
+    # create watchdog and apply some regex filters on what to trigger on
     observer = Observer()
     my_handler = MyHandler(
         regexes=[r".*/NISAR_.+?\.h5$"], ignore_directories=True, case_sensitive=True
     )
+
+    # start watching
     observer.schedule(my_handler, watch_dir, recursive=True)
-    # logging_handler = LoggingEventHandler()
-    # observer.schedule(logging_handler, watch_dir, recursive=True)
     observer.start()
     try:
         while True:
