@@ -1,4 +1,4 @@
-service: unity-on-demand-api
+service: unity-on-demand-api-trigger
 
 frameworkVersion: '3'
 
@@ -25,18 +25,17 @@ functions:
   app:
     package:
       patterns:
-        - "!run_local.sh"
+        - "!test_client.*"
         - "!deploy.sh"
         - "!.virtualenv/**"
         - "!env/**"
         - "!__pycache__/**"
-    handler: app.main.handler
+        - "!triggers/**"
+        - "!update_client.sh"
+    handler: app.lambda_handler
     environment:
       STAGE: ${self:provider.stage}
-      CLUSTER_NAME: ${param:cluster_name}
-    events:
-      - http: ANY /
-      - http: 'ANY /{proxy+}'
+      OD_API_URL: ${param:url}
 
 plugins:
   - serverless-python-requirements

@@ -1,8 +1,12 @@
+import logging
+
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
 from app.config import Settings, get_settings
 
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/test",
@@ -25,6 +29,7 @@ class EchoResponse(BaseModel):
 async def echo(
     echo_str: str, settings: Settings = Depends(get_settings)
 ) -> EchoResponse:
+    logger.info("logging from app logger")
     return {
         "success": True,
         "message": f"Echoing '{echo_str}' from stage {settings.stage}",

@@ -1,6 +1,8 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
+
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PrewarmResponse")
 
@@ -11,12 +13,12 @@ class PrewarmResponse:
     Attributes:
         success (bool):
         message (str):
-        request_id (str):
+        request_id (Union[Unset, str]):
     """
 
     success: bool
     message: str
-    request_id: str
+    request_id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -30,9 +32,10 @@ class PrewarmResponse:
             {
                 "success": success,
                 "message": message,
-                "request_id": request_id,
             }
         )
+        if request_id is not UNSET:
+            field_dict["request_id"] = request_id
 
         return field_dict
 
@@ -43,7 +46,7 @@ class PrewarmResponse:
 
         message = d.pop("message")
 
-        request_id = d.pop("request_id")
+        request_id = d.pop("request_id", UNSET)
 
         prewarm_response = cls(
             success=success,
