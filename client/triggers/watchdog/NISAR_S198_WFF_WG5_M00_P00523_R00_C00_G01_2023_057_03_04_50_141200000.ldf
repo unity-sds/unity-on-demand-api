@@ -1,0 +1,85 @@
+{
+    "mission": "nisar",
+    "scid": 198,
+    "station": "wff",
+    "antenna": "wg5",
+    "pass": 523,
+    "mode": 0,
+    "receiver": 0,
+    "channel": 0,
+    "group": 1,
+    "complete": true,
+    "numFiles": 660,
+    "files": [
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_056_17_27_26_293435000.vc08",
+            "md5": "i/XcgvzSmFfwd0xSDgFZPA==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_056_17_27_27_294584000.vc08",
+            "md5": "lf/DmDkzB6JNE3qOWn5ygw==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_056_17_27_28_295733000.vc08",
+            "md5": "MS83x5N+12Eu0RGTDiRb8w==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_056_17_27_29_296852000.vc08",
+            "md5": "AHgvtmiNNCBc5Fm2VgAACA==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_056_17_27_30_297976000.vc08",
+            "md5": "XRK9FLGk2Uqnm8uJGpwsLw==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_057_02_51_41_586039000.vc12",
+            "md5": "2FM3h+AMaobipH+4pUfUnA==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_057_02_51_42_587190000.vc12",
+            "md5": "FbAdKVnIqf7SlmNEWyfVDQ==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_057_02_51_43_588366000.vc12",
+            "md5": "/PPx0bFa9xq5RFSFirO9aw==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_057_02_51_44_589543000.vc12",
+            "md5": "gF9Fw5A6rBrjToTMzScokA==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        },
+        {
+            "name": "NISAR_S198_WFF_WG5_M00_P00523_R00_C00_G01_2023_057_02_51_45_590734000.vc12",
+            "md5": "xSuf2c8kbeJ2Kq55XcyLSw==",
+            "transid": 0,
+            "size": 207400000,
+            "status": "success"
+        }
+    ]
+}

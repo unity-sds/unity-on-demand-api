@@ -44,7 +44,7 @@ def main(client):
     # create watchdog and apply some regex filters on what to trigger on
     observer = Observer()
     my_handler = MyHandler(
-        regexes=[r".*/NISAR_.+?\.h5$"], ignore_directories=True, case_sensitive=True
+        regexes=[r".*/NISAR_.+?\.ldf$"], ignore_directories=True, case_sensitive=True
     )
 
     # start watching

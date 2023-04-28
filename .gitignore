@@ -339,3 +339,9 @@ poetry.toml
 .serverless
 
 # End of https://www.toptal.com/developers/gitignore/api/node,python,serverless,osx
+
+# temp directories
+tmp/
+
+# VSCode workspaces
+*.code-workspace
