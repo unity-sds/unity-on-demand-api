@@ -23,7 +23,7 @@ def test_echo():
 
 @pytest.fixture
 def response():
-    return create_prewarm_request.sync(client=client)
+    return create_prewarm_request.sync(client=client, node_count=4)
 
 
 def test_create_prewarm_request(response):
@@ -39,3 +39,23 @@ def test_get_prewarm_status(response):
 def test_cancel_prewarm_status(response):
     r = cancel_prewarm_request.sync(client=client, request_id=response.request_id)
     logging.info(f"response: {r}")
+
+
+@pytest.fixture
+def response_additive():
+    return create_prewarm_request.sync(client=client, node_count=1, additive=True)
+
+
+def test_create_prewarm_request_additive(response_additive):
+    logging.info(f"response_additive: {response_additive}")
+    assert response_additive.success == True
+
+
+def test_get_prewarm_status_additive(response_additive):
+    r = get_prewarm_request.sync(client=client, request_id=response_additive.request_id)
+    logging.info(f"response_additive: {r}")
+
+
+def test_cancel_prewarm_status_additive(response_additive):
+    r = cancel_prewarm_request.sync(client=client, request_id=response_additive.request_id)
+    logging.info(f"response_additive: {r}")

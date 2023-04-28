@@ -31,7 +31,7 @@ class MyHandler(RegexMatchingEventHandler):
         COUNTER += 1
         if COUNTER % 20 == 0:
             logging.info(f"In MyHandler: {event} {COUNTER}")
-            r = create_prewarm_request.sync_detailed(client=client, node_count=COUNTER)
+            r = create_prewarm_request.sync_detailed(client=client, node_count=1, additive=True)
             logging.info(f"response: {r}")
 
 

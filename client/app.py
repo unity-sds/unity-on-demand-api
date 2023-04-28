@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     # make prewarm call
     try:
         prewarm_response = create_prewarm_request.sync(
-            client=client, node_count=1
+            client=client, node_count=1, additive=True
         )
         print(f"prewarm response: {prewarm_response}")
         return prewarm_response.success

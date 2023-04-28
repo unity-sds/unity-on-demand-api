@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Unity On-Demand REST API",
-    version="0.0.1",
+    version="0.0.2",
     description="Unity On-Demand Operations",
     root_path=f"/{os.environ.get('STAGE')}/" if "STAGE" in os.environ else None,
     generate_unique_id_function=lambda route: f"{route.name}",

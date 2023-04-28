@@ -1,6 +1,6 @@
 {
   "name": "unity-on-demand-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Example of a Python Flask API service with traditional Serverless Framework",
   "author": "",
   "devDependencies": {

@@ -32,33 +32,64 @@ class PrewarmResponse(BaseModel):
     request_id: Optional[str]
 
 
+def get_conf():
+    """Retrieve configuration parameters through environment variables."""
+
+    # configuration dict
+    conf = dict()
+
+    # retrieve EKS cluster name
+    if "CLUSTER_NAME" in os.environ:
+        conf["cluster_name"] = os.environ["CLUSTER_NAME"]
+    else:
+        raise RuntimeError("No configured EKS cluster.")
+
+    # retrieve SPS API URL
+    if "SPS_API_URL" in os.environ:
+        conf["sps_api_url"] = os.environ["SPS_API_URL"]
+    else:
+        raise RuntimeError("No configured SPS API URL.")
+
+    # log conf
+    logger.info(f"conf: {conf}")
+
+    return conf
+
+
 @router.post("/prewarm")
 async def create_prewarm_request(
-    response: Response, node_count: int = 20
+    response: Response, node_count: int = 1, additive: bool = False
 ) -> PrewarmResponse:
     try:
-        # retrieve EKS cluster name
-        if "CLUSTER_NAME" in os.environ:
-            cluster_name = os.environ["CLUSTER_NAME"]
-        else:
-            raise RuntimeError("No configured EKS cluster.")
-
-        # retrieve SPS API URL
-        if "SPS_API_URL" in os.environ:
-            sps_api_url = os.environ["SPS_API_URL"]
-        else:
-            raise RuntimeError("No configured SPS API URL.")
+        # retrieve conf
+        conf = get_conf()
 
         # retrieve info of that node group
-        r = httpx.get(f"{sps_api_url}/sps/node-group-info")
+        r = httpx.get(f"{conf['sps_api_url']}/sps/node-group-info")
         r.raise_for_status()
         node_group_info = r.json()
         logger.info(
             f"node_group_info: {json.dumps(node_group_info, indent=2, cls=DatetimeEncoder)}"
         )
 
-        # increment the desiredSize for the node group by 1
-        r = httpx.post(f"{sps_api_url}/sps/prewarm", json={"num_nodes": node_group_info["desired_size"] + 1})
+        # node_count is absolute or additive?
+        desired_size = node_group_info["desired_size"]
+        prewarm_count = desired_size + node_count if additive else node_count
+        logger.info(
+            f"additive, prewarm_count: {additive}, {prewarm_count}"
+        )
+
+        # call prewarm only if there are nodes to add (don't terminated nodes)
+        if prewarm_count <= desired_size:
+            return {
+                "success": True,
+                "message": f"Not need to prewarm. {desired_size} nodes are already desired.",
+                "request_id": ""
+            }
+
+
+        # prewarm to node_count passed in
+        r = httpx.post(f"{conf['sps_api_url']}/sps/prewarm", json={"num_nodes": prewarm_count})
         r.raise_for_status()
         update_resp = r.json()
         logger.info(
@@ -68,7 +99,7 @@ async def create_prewarm_request(
         # return update ID
         return {
             "success": True,
-            "message": f"Got node_count:{node_count}",
+            "message": f"Prewarming to node count: {prewarm_count}",
             "request_id": update_resp["prewarm_request_id"],
         }
     except Exception as e:
@@ -81,20 +112,11 @@ async def create_prewarm_request(
 @router.get("/prewarm/{request_id}")
 async def get_prewarm_request(response: Response, request_id: str) -> PrewarmResponse:
     try:
-        # retrieve EKS cluster name
-        if "CLUSTER_NAME" in os.environ:
-            cluster_name = os.environ["CLUSTER_NAME"]
-        else:
-            raise RuntimeError("No configured EKS cluster.")
-
-        # retrieve SPS API URL
-        if "SPS_API_URL" in os.environ:
-            sps_api_url = os.environ["SPS_API_URL"]
-        else:
-            raise RuntimeError("No configured SPS API URL.")
+        # retrieve conf
+        conf = get_conf()
 
         # retrieve info on prewarm request ID
-        r = httpx.get(f"{sps_api_url}/sps/prewarm/{request_id}")
+        r = httpx.get(f"{conf['sps_api_url']}/sps/prewarm/{request_id}")
         r.raise_for_status()
         status_resp = r.json()
         logger.info(

@@ -21,14 +21,10 @@ from unity_on_demand_client.api.on_demand_v0_1_0 import (
 )
 
 
-# global counter
-COUNTER = 0
-
-
 class MyHandler(RegexMatchingEventHandler):
     def on_created(self, event):
         logging.info(f"In MyHandler: {event}")
-        r = create_prewarm_request.sync_detailed(client=client, node_count=COUNTER)
+        r = create_prewarm_request.sync_detailed(client=client, node_count=1, additive=True)
         logging.info(f"response: {r}")
 
 

@@ -13,7 +13,8 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     client: Client,
-    node_count: Union[Unset, None, int] = 20,
+    node_count: Union[Unset, None, int] = 1,
+    additive: Union[Unset, None, bool] = False,
 ) -> Dict[str, Any]:
     url = "{}/on-demand/v010/prewarm".format(client.base_url)
 
@@ -22,6 +23,8 @@ def _get_kwargs(
 
     params: Dict[str, Any] = {}
     params["node_count"] = node_count
+
+    params["additive"] = additive
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -79,12 +82,14 @@ def _build_response(
 def sync_detailed(
     *,
     client: Client,
-    node_count: Union[Unset, None, int] = 20,
+    node_count: Union[Unset, None, int] = 1,
+    additive: Union[Unset, None, bool] = False,
 ) -> Response[Union[Any, HTTPValidationError, PrewarmResponse]]:
     """Create Prewarm Request
 
     Args:
-        node_count (Union[Unset, None, int]):  Default: 20.
+        node_count (Union[Unset, None, int]):  Default: 1.
+        additive (Union[Unset, None, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -97,6 +102,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         client=client,
         node_count=node_count,
+        additive=additive,
     )
 
     response = httpx.request(
@@ -110,12 +116,14 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-    node_count: Union[Unset, None, int] = 20,
+    node_count: Union[Unset, None, int] = 1,
+    additive: Union[Unset, None, bool] = False,
 ) -> Optional[Union[Any, HTTPValidationError, PrewarmResponse]]:
     """Create Prewarm Request
 
     Args:
-        node_count (Union[Unset, None, int]):  Default: 20.
+        node_count (Union[Unset, None, int]):  Default: 1.
+        additive (Union[Unset, None, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -128,18 +136,21 @@ def sync(
     return sync_detailed(
         client=client,
         node_count=node_count,
+        additive=additive,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: Client,
-    node_count: Union[Unset, None, int] = 20,
+    node_count: Union[Unset, None, int] = 1,
+    additive: Union[Unset, None, bool] = False,
 ) -> Response[Union[Any, HTTPValidationError, PrewarmResponse]]:
     """Create Prewarm Request
 
     Args:
-        node_count (Union[Unset, None, int]):  Default: 20.
+        node_count (Union[Unset, None, int]):  Default: 1.
+        additive (Union[Unset, None, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -152,6 +163,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         client=client,
         node_count=node_count,
+        additive=additive,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
@@ -163,12 +175,14 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-    node_count: Union[Unset, None, int] = 20,
+    node_count: Union[Unset, None, int] = 1,
+    additive: Union[Unset, None, bool] = False,
 ) -> Optional[Union[Any, HTTPValidationError, PrewarmResponse]]:
     """Create Prewarm Request
 
     Args:
-        node_count (Union[Unset, None, int]):  Default: 20.
+        node_count (Union[Unset, None, int]):  Default: 1.
+        additive (Union[Unset, None, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -182,5 +196,6 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             node_count=node_count,
+            additive=additive,
         )
     ).parsed
