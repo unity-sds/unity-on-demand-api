@@ -35,7 +35,7 @@ functions:
     handler: app.lambda_handler
     environment:
       STAGE: ${self:provider.stage}
-      OD_API_URL: ${param:url}
+      OD_API_URL: ${param:od_api_url}
 
 plugins:
   - serverless-python-requirements
