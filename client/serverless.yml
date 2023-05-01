@@ -26,12 +26,13 @@ functions:
     package:
       patterns:
         - "!test_client.*"
-        - "!deploy.sh"
+        - "!deploy*.sh"
         - "!.virtualenv/**"
         - "!env/**"
         - "!__pycache__/**"
         - "!triggers/**"
         - "!update_client.sh"
+        - "!*.code-workspace"
     handler: app.lambda_handler
     environment:
       STAGE: ${self:provider.stage}
