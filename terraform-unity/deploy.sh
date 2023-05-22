@@ -14,13 +14,19 @@ serverless --version
 
 # clone unity-on-demand-api repo
 git clone https://github.com/unity-sds/unity-on-demand-api.git
+cd unity-on-demand-api
+
+# export serverless args
+export sls_args="--param cluster_name=unity-sps-on-demand-${RandomString} \
+  --param sps_api_url=http://${sps_api}:5002 \
+  --param permissionsBoundaryPolicyName=${PrivilegedPolicyName} \
+  --region ${region} \
+  --stage ${RandomString}"
 
 # deploy
-cd unity-on-demand-api
 serverless plugin install -n serverless-python-requirements
 serverless plugin install -n serverless-wsgi
-serverless deploy --param cluster_name=unity-sps-on-demand-${RandomStringResource.RandomString} \
-  --param sps_api_url=http://${!sps_api}:5002 \
-  --param permissionsBoundaryPolicyName=${PrivilegedPolicyName} \
-  --region ${AWS::Region} \
-  --stage ${RandomStringResource.RandomString}
+serverless deploy $sls_args
+
+# output deployment info
+serverless info --verbose $sls_args > /tmp/deployment_info.yaml
