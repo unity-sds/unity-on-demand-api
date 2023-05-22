@@ -1,7 +1,6 @@
 variable "deploy_script_path" {
   description = "absolute path to deploy script on host"
   type        = string
-  default     = "/Users/gmanipon/dev/unity-on-demand-api/terraform-unity/deploy.sh"
 }
 
 variable "aws_access_key_id" {
