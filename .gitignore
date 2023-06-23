@@ -344,4 +344,10 @@ poetry.toml
 tmp/
 
 # VSCode workspaces
+.vscode
 *.code-workspace
+
+# terraform
+.terraform*
+*.tfstate*
+secret.tfvars
